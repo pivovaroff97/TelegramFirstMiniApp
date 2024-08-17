@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Угадай флаг страны</title>
+  <link rel="stylesheet" href="../css/guessFlag.css">
+</head>
+<body>
+
+<div id="game">
+  <h1>Угадай флаг!</h1>
+  <img id="flag" src="" alt="Флаг" />
+  <div id="options" class="options"></div>
+</div>
+<a href="../index.html" class="previousBtn">❮ Back to menu</a>
+
+<!-- The Modal -->
+<div id="resultModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="resultId"></p>
+    <button id="continueButtonId"></button>
+  </div>
+
+</div>
+<script src="../js/guessFlag.js"></script>
+</body>
+</html>
