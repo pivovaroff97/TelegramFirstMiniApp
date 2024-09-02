@@ -10,13 +10,18 @@
 
 <div id="game">
   <h1>Угадай флаг!</h1>
-  <img id="flag" src="" alt="Флаг" />
+  <img class="flag" id="flag" src="" alt="Флаг" />
   <div id="options" class="options"></div>
 </div>
-<a href="../index.html" class="previousBtn">❮ Back to menu</a>
+<div class="footer">
+  <a href="../index.html" class="previousBtn">❮ Back to menu</a>
+  <div class="popup" id="popup">
+    <img class="settings" id="settings" src="../img/gear.svg" alt="settings" />
+  </div>
+</div>
 
 <!-- The Modal -->
-<div id="resultModal" class="modal">
+<div id="result-modal" class="modal">
 
   <!-- Modal content -->
   <div class="modal-content">
@@ -25,6 +30,24 @@
     <button id="continueButtonId"></button>
   </div>
 
+</div>
+
+<!-- Settings Modal -->
+<div class="modal" id="setting-modal">
+  <div class="modal-content">
+    <span class="close" id="close-setting-modal">&times;</span>
+    <h2>Выбрать континент</h2>
+    <label for="dropdown"></label>
+    <select id="dropdown">
+      <option value="all">All world</option>
+      <option value="europe">Europe</option>
+      <option value="asia">Asia</option>
+      <option value="americas">America</option>
+      <option value="africa">Africa</option>
+      <option value="oceania">Oceania</option>
+    </select>
+    <button id="saveSettingsBtn">Save</button>
+  </div>
 </div>
 <script src="../js/guessFlag.js"></script>
 </body>

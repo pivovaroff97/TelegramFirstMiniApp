@@ -12,7 +12,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-img {
+img.flag {
   max-width: 300px;
   height: 200px;
   margin: 20px 0;
@@ -98,4 +98,13 @@ img {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+img.settings {
+  max-width: 40px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
 }

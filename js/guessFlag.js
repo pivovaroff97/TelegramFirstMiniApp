@@ -1,17 +1,23 @@
-const flags = [];
+let flags = [];
 let level = 0;
 
-fetch('https://restcountries.com/v3.1/all?fields=name,flags')
-  .then(response => response.json())
-  .then(data => {
-    data.forEach(d => {
-      flags.push({
-        src: d.flags.svg,
-        name: d.name.common
+function getCountries(region) {
+  if (region !== 'all') {
+    region = 'region/' + region;
+  }
+  fetch('https://restcountries.com/v3.1/' + region + '?fields=name,flags')
+    .then(response => response.json())
+    .then(data => {
+      flags = [];
+      data.forEach(d => {
+        flags.push({
+          src: d.flags.svg,
+          name: d.name.common
+        });
       });
+      loadNewFlag();
     });
-    loadNewFlag();
-  });
+}
 
 function getRandomOptions(correctAnswer) {
   const shuffled = flags
@@ -48,7 +54,6 @@ function checkAnswer(event) {
 
   if (selectedAnswer === currentFlag.name) {
     level++;
-    loadNewFlag();
   } else {
     const p = document.getElementById("resultId");
     p.innerHTML = 'Right answer is ' + currentFlag.name + '. Your score is ' + level;
@@ -56,18 +61,21 @@ function checkAnswer(event) {
     modal.style.display = "block";
     level = 0;
   }
+  loadNewFlag();
 }
 
-// Get the modal
-const modal = document.getElementById("resultModal");
+function saveSettings() {
+  const categories = document.getElementById("dropdown");
+  getCountries(categories.value);
+  settingModal.style.display = "none";
+}
 
-// Get the button that opens the modal
+const modal = document.getElementById("result-modal");
+
 const btn = document.getElementById("continueButtonId");
 
-// Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
 }
@@ -75,9 +83,37 @@ span.onclick = function() {
 btn.onclick = function () {
   modal.style.display = "none";
 }
-// When the user clicks anywhere outside of the modal, close it
+
 window.onclick = function(event) {
   if (event.target === modal) {
     modal.style.display = "none";
   }
+  if (event.target === settingModal) {
+    settingModal.style.display = "none";
+  }
 }
+
+const gear = document.getElementById("settings");
+
+const settingModal = document.getElementById("setting-modal");
+
+const saveSettingsBtn = document.getElementById("saveSettingsBtn");
+
+const spanCloseSettings = document.getElementsByClassName("close")[1];
+
+gear.onclick = function () {
+  settingModal.style.display = "block";
+}
+
+saveSettingsBtn.onclick = function () {
+  settingModal.style.display = "none";
+}
+
+spanCloseSettings.onclick = function() {
+  settingModal.style.display = "none";
+}
+
+//TODO: make one modal window
+saveSettingsBtn.onclick = saveSettings;
+
+getCountries('all');
